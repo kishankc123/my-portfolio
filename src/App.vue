@@ -335,26 +335,35 @@ import heroImage from './assets/hero.png';
 const scrollProgress = ref(0);
 
 const heroRole =
-  'Full-Stack Software Engineer focused on scalable front-end and back-end systems';
+  'Full-Stack Software Engineer building web applications and AI/ML systems';
 
 const summary =
-  'Full-stack software engineer skilled in building scalable front-end and back-end solutions using React, Node.js, Flask, SQL, and TypeScript. Experienced in designing databases, integrating systems across client-server architectures, optimizing performance, and delivering robust user-focused software in agile environments.';
+  'Full-stack software engineer with hands-on experience across modern web development and applied machine learning. Skilled in building scalable front-end and back-end systems with React, Next.js, Node.js, Flask, SQL, and TypeScript, while also shipping research-driven Python projects involving recommendation systems, computer vision, and GPT-powered applications.';
 
 const journeyIntro =
-  'Experience across product engineering, reusable UI systems, REST integrations, secure role-based applications, and performance-focused web delivery.';
+  'Experience across full-stack product engineering, secure application architecture, recommendation systems, computer vision workflows, and AI-assisted user experiences.';
 
 const socialLinks = [
+  { label: 'Website', icon: 'website', href: 'https://www.kckishan.com.np/' },
   { label: 'GitHub', icon: 'github', href: 'https://github.com/kishankc123/' },
   {
     label: 'LinkedIn',
     icon: 'linkedin',
     href: 'https://www.linkedin.com/in/kishan-kc19/',
   },
-  { label: 'Indeed', icon: 'indeed', href: '' },
   { label: 'Gmail', icon: 'gmail', href: 'mailto:kishan.kc.cs@gmail.com' },
 ];
 
 const brandIcons = {
+  website: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Zm6.92 8h-3.1a14.7 14.7 0 0 0-1.16-4A7.04 7.04 0 0 1 18.92 11ZM12 5.06c.71.84 1.66 2.8 1.93 5.94h-3.86C10.34 7.86 11.29 5.9 12 5.06ZM9.34 7a14.7 14.7 0 0 0-1.16 4h-3.1A7.04 7.04 0 0 1 9.34 7ZM5.08 13h3.1a14.7 14.7 0 0 0 1.16 4A7.04 7.04 0 0 1 5.08 13ZM12 18.94c-.71-.84-1.66-2.8-1.93-5.94h3.86c-.27 3.14-1.22 5.1-1.93 5.94ZM14.66 17a14.7 14.7 0 0 0 1.16-4h3.1A7.04 7.04 0 0 1 14.66 17Z',
+        fill: 'currentColor',
+      },
+    ],
+  },
   github: {
     viewBox: '0 0 24 24',
     paths: [
@@ -507,7 +516,6 @@ const skills = [
   'Java',
   'C++',
   'Bash',
-  'PHP',
   'HTML',
   'CSS',
   'React',
@@ -523,7 +531,6 @@ const skills = [
   'REST APIs',
   'PostgreSQL',
   'MySQL',
-  'MS SQL',
   'Prisma ORM',
   'Docker',
   'AWS',
@@ -535,9 +542,10 @@ const skills = [
   'Git',
   'GPT API Integration',
   'OpenCV',
+  'Computer Systems Simulation',
   'Machine Learning',
-  'Xcode',
-  'MS Visual Studio',
+  'PyTorch',
+  'Google Colab',
 ].map(buildSkillBadge);
 
 const education = [
@@ -545,40 +553,61 @@ const education = [
     badge: 'MS',
     degree: 'Master of Science, Computer Science',
     school: 'George Washington University',
-    meta: 'GPA 3.7 • Washington, DC • May 2026',
+    meta: 'Washington, DC • May 2026',
   },
   {
     badge: 'BS',
     degree: 'BSc, Computer Science & Information Technology',
     school: 'Tribhuvan University',
-    meta: 'GPA 3.7 • Kathmandu, Nepal • Dec 2022',
+    meta: 'Kathmandu, Nepal • Dec 2022',
   },
 ];
 
 const projectGroups = [
   {
     title: 'Featured Projects',
-    caption: 'Graduate and production-ready application work from the resume',
+    caption: 'Latest academic and application engineering work from the new CV',
     items: [
+      {
+        title: 'MovieLens 100K Recommender System',
+        description:
+          'Built recommendation pipelines in Python for collaborative, content-based, and hybrid ranking, implementing LightGCN with PyTorch and evaluating performance on the MovieLens 100K dataset.',
+        tags: ['Python', 'PyTorch', 'Machine Learning', 'Google Colab'],
+        github:
+          'https://github.com/kishankc123/Advanced_Machine_Learning/blob/main/MovieLens100k.ipynb',
+        link: '',
+        accent:
+          'linear-gradient(135deg, rgba(144, 165, 255, 0.22), rgba(0, 0, 0, 0.42))',
+      },
       {
         title: 'WeCureIt',
         description:
-          'A full-stack medical scheduling platform with role-based access for doctors, patients, and admins, built with Next.js, React, TypeScript, Prisma, Tailwind CSS, and PostgreSQL.',
-        tags: ['Next.js', 'React', 'TypeScript', 'Prisma', 'Tailwind CSS', 'PostgreSQL'],
+          'A secure role-based clinical scheduling platform built with Next.js, React, TypeScript, Node.js, Prisma ORM, and PostgreSQL, with concurrency-safe booking logic and 2FA-backed authentication.',
+        tags: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Prisma ORM', 'PostgreSQL'],
         github: 'https://github.com/kishankc123/WeCureIt/tree/main',
         link: '',
         accent:
           'linear-gradient(135deg, rgba(111, 160, 255, 0.22), rgba(0, 0, 0, 0.42))',
       },
       {
-        title: 'AI-Assisted Learning and Summarization System',
+        title: 'Dynamic Test-Time Training for Image Classification',
         description:
-          'An AI-powered learning platform that used Python, Flask, Vue.js, PostgreSQL, transcript processing, and GPT-based services for summaries, adaptive assessments, and study suggestions.',
-        tags: ['Python', 'Flask', 'Vue.js', 'PostgreSQL', 'GPT API', 'OpenCV'],
+          'Improved robustness under blur and stylized distribution shifts with a research-driven test-time training system in PyTorch, achieving strong gains on distorted image inputs.',
+        tags: ['Python', 'PyTorch', 'Machine Learning', 'Google Colab'],
         github: '',
         link: '',
         accent:
           'linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.45))',
+      },
+      {
+        title: 'AI-Assisted Video Content Summarization',
+        description:
+          'Built an AI-powered learning platform that generated timestamped summaries and quizzes using GPT APIs with a Flask backend, Vue.js frontend, OpenCV processing, and Linux-based workflows.',
+        tags: ['Python', 'Flask', 'Vue.js', 'GPT API Integration', 'OpenCV', 'Docker'],
+        github: '',
+        link: '',
+        accent:
+          'linear-gradient(135deg, rgba(166, 217, 255, 0.14), rgba(0, 0, 0, 0.45))',
       },
     ],
   },
