@@ -566,7 +566,7 @@ const education = [
 const projectGroups = [
   {
     title: 'Featured Projects',
-    caption: 'Latest academic and application engineering work from the new CV',
+    caption: 'Latest academic and application engineering work demonstrating full-stack development, AI-assisted systems, and scalable application design.',
     items: [
       {
         title: 'MovieLens 100K Recommender System',
