@@ -408,25 +408,25 @@ const brandIcons = {
 const experience = [
   {
     company: 'Beehive Technologies',
-    role: 'Associate Software Developer',
-    date: 'Jun 2023 - Dec 2023',
+    role: 'Software Engineer',
+    date: 'Jan 2023 - Dec 2023',
     logo: '◉',
-    points: [
-      'Built and shipped a multi-tenant analytics platform using React, Next.js, and TypeScript for role-specific Admin, Manager, and Client workflows.',
-      'Engineered optimized data fetching with React Query, reducing redundant API requests and improving load performance by about 30%.',
-      'Implemented secure RBAC with protected routes and permission-aware UI rendering for multi-tenant access control.',
-      'Strengthened release reliability with Jest-based automated testing in GitHub Actions CI/CD pipelines.',
-    ],
-  },
+    points: [   "Delivered multi-tenant analytics workflows across user roles by developing a scalable platform using React, Next.js,TypeScript, and Node.js, following Agile practices with Jira and Git-based version control.",
+"Improved application load performance by ~30% by implementing a React Query-based data-fetching layer, leveraging caching, background revalidation, and optimized API calls to reduce redundant network requests",
+"Ensured secure, role-based data access across tenants by implementing RBAC using Node.js, Express.js, and protected React routes, enforcing permission-aware UI rendering and backend authorization checks",
+"Reduced state inconsistencies in complex workflows through centralized state management using Redux Toolkit, improving data synchronization across multiple interconnected UI modules.",
+"Increased release reliability and reduced regressions by integrating Jest testing into GitHub Actions CI/CD pipelines,automating build validation and ensuring consistent deployment workflows using Docker and Linux environments"
+  ]},
   {
     company: 'Devops Technology',
-    role: 'Software Development Intern',
+    role: 'Software Developer',
     date: 'Jun 2022 - Dec 2022',
     logo: '△',
     points: [
-      'Designed and built reusable React components for employee management, attendance, and payroll modules using modular UI patterns.',
-      'Improved UI responsiveness and accessibility with HTML5, CSS3, ES6+, Ant Design, and Bootstrap, contributing to a 15% increase in user engagement.',
-      'Validated and integrated REST APIs with PHP backends and MS SQL databases to support secure CRUD workflows across HRM modules.',
+      'Reduced feature development time by 20% by building reusable UI components using React, TypeScript, Redux Toolkit, and Tailwind CSS, enabling scalable integration across HRM modules such as payroll and attendance systems.',
+      'Increased user engagement by 15% and improved cross-browser performance by optimizing responsive UI using JavaScript(ES6+), HTML5, CSS3, and Ant Design, ensuring accessibility and efficient DOM rendering.',
+      'Improved application performance by ~25% through centralized state management using Redux Toolkit, minimizing unnecessary re-renders and enabling efficient data normalization and transformation across complex UI workflows.',
+      'Enabled secure and reliable data operations by integrating REST APIs using Postman and connecting them to a structuredfrontend service layer, ensuring consistent CRUD functionality across HRM features.'
     ],
   },
   {
@@ -441,7 +441,7 @@ const experience = [
   },
   {
     company: 'Tribhuvan University',
-    role: 'BSc, Computer Science & Information Technology',
+    role: 'BSc Computer Science & Information Technology',
     date: 'Dec 2022',
     logo: '◇',
     points: [
