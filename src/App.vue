@@ -95,7 +95,7 @@
             </div>
           </div>
 
-          <p class="section-kicker">I turn coffee into code</p>
+          <p class="section-kicker">Building systems that fail gracefully and improve continuously</p>
 
           <div class="about-grid">
             <div class="journey-intro">
