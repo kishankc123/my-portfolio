@@ -5,9 +5,8 @@
     <section id="hero" class="hero-section">
       <div class="hero-pattern"></div>
       <div class="hero-copy">
-        <p class="eyebrow">Application Developer</p>
-        <h1 class="hero-name">KISHAN</h1>
-        <h2 class="hero-subtitle">K C</h2>
+        <p class="eyebrow">Aspiring Software Engineer</p>
+        <h1 class="hero-name">KISHAN K C</h1>
         <div class="hero-divider"></div>
         <p class="hero-role">{{ heroRole }}</p>
 
@@ -88,7 +87,7 @@
       <section id="about" class="content-section section-light">
         <div class="section-inner">
           <div class="section-heading">
-            <span class="section-marker">◀</span>
+            <span class="section-marker"></span>
             <div>
               <h2>About Me</h2>
               <p>{{ summary }}</p>
@@ -100,7 +99,7 @@
           <div class="about-grid">
             <div class="journey-intro">
               <h3>Journey</h3>
-              <p>{{ journeyIntro }}</p>
+              <p style="justify-content: baseline;">{{ journeyIntro }}</p>
               <div class="triangle-grid" aria-hidden="true">
                 <span v-for="n in 35" :key="n"></span>
               </div>
@@ -420,7 +419,7 @@ const experience = [
   {
     company: 'Devops Technology',
     role: 'Software Developer',
-    date: 'Jun 2022 - Dec 2022',
+    date: 'Ian 2022 - Dec 2022',
     logo: '△',
     points: [
       'Reduced feature development time by 20% by building reusable UI components using React, TypeScript, Redux Toolkit, and Tailwind CSS, enabling scalable integration across HRM modules such as payroll and attendance systems.',
