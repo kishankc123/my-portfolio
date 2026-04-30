@@ -67,73 +67,97 @@
           </button>
         </div>
 
+        <div class="hero-section-nav" aria-label="Section shortcuts">
+          <button
+            v-for="section in sectionLinks"
+            :key="section.id"
+            type="button"
+            class="section-jump"
+            @click="scrollTo(section.id)"
+          >
+            <span class="section-jump-icon" aria-hidden="true">{{ section.icon }}</span>
+            <span>{{ section.label }}</span>
+          </button>
+        </div>
+
         <button class="scroll-cue" @click="scrollTo('about')">
           <!-- <span class="scroll-arrow">↓</span>
           <span>Scroll Down</span> -->
         </button>
       </div>
 
-      <div class="hero-portrait-wrap">
-        <div class="portrait-glow"></div>
-        <img
-          
-        />
-      </div>
     </section>
 
     <main>
-      <section id="about" class="content-section section-light">
+      <section id="about" class="content-section section-light about-section">
         <div class="section-inner">
           <div class="section-heading">
-            <span class="section-marker">◀</span>
             <div>
               <h2>About Me</h2>
               <p>{{ summary }}</p>
             </div>
           </div>
 
-          <p class="section-kicker">"Building systems that fail gracefully and improve continuously"</p>
-
-          <div class="about-grid">
+          <div class="journey-block">
             <div class="journey-intro">
               <h3>Journey</h3>
-              <p>{{ journeyIntro }}</p>
-              <div class="triangle-grid" aria-hidden="true">
-                <span v-for="n in 35" :key="n"></span>
-              </div>
+              <p class="journey-summary">{{ journeyIntro }}</p>
             </div>
 
-            <div class="timeline-card">
+            <div class="journey-timeline">
               <article
-                v-for="(item, index) in experience"
-                :key="item.company"
-                class="timeline-item"
-                :class="{ expanded: expandedExperience === index }"
+                v-for="(item, index) in journeyTimeline"
+                :key="`${item.type}-${item.title}`"
+                class="journey-card"
+                :class="{ expanded: expandedJourneyIndex === index }"
+                :id="item.anchorId || undefined"
               >
-                <button
-                  class="timeline-header"
-                  type="button"
-                  @click="toggleExperience(index)"
-                  :aria-expanded="expandedExperience === index"
-                >
-                  <div class="timeline-company">
-                    <span class="timeline-logo">{{ item.logo }}</span>
-                    <div>
-                      <h4>{{ item.company }}</h4>
-                      <p>{{ item.role }}</p>
+                <div class="journey-year" aria-hidden="true">{{ item.year }}</div>
+                <div class="journey-node" aria-hidden="true"></div>
+                <div class="journey-card-shell">
+                  <button
+                    class="journey-toggle"
+                    type="button"
+                    @click="toggleJourney(index)"
+                    :aria-expanded="expandedJourneyIndex === index"
+                  >
+                    <div class="journey-card-top">
+                      <span v-if="item.kindLabel" class="journey-kind">{{ item.kindLabel }}</span>
+                      <span class="journey-date">{{ item.date }}</span>
+                    </div>
+                    <h4>{{ item.title }}</h4>
+                    <p class="journey-role">{{ item.subtitle }}</p>
+                    <p class="journey-meta">{{ item.meta }}</p>
+                  </button>
+
+                  <div v-if="expandedJourneyIndex === index" class="journey-details">
+                    <ul class="journey-points">
+                      <li v-for="point in item.points" :key="point">{{ point }}</li>
+                    </ul>
+                    <div
+                      v-if="item.type === 'education'"
+                      class="journey-education-footer"
+                    >
+                      <div class="journey-courses">
+                        <span
+                          v-for="course in item.courses"
+                          :key="course"
+                          class="course-pill"
+                        >
+                          {{ course }}
+                        </span>
+                      </div>
+                      <a
+                        class="transcript-button"
+                        :href="item.transcriptHref || '#about'"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View Transcript
+                      </a>
                     </div>
                   </div>
-                  <div class="timeline-meta">
-                    <span>{{ item.date }}</span>
-                    <span class="timeline-chevron">
-                      {{ expandedExperience === index ? '⌃' : '⌄' }}
-                    </span>
-                  </div>
-                </button>
-
-                <ul v-if="expandedExperience === index" class="timeline-points">
-                  <li v-for="point in item.points" :key="point">{{ point }}</li>
-                </ul>
+                </div>
               </article>
             </div>
           </div>
@@ -143,16 +167,19 @@
       <section id="skills" class="content-section section-dark">
         <div class="section-inner">
           <div class="section-heading">
-            <span class="section-marker">◀</span>
             <div>
               <h2>Skills</h2>
             </div>
           </div>
 
-          <div class="skills-block">
-            <h3>Tools</h3>
+          <div
+            v-for="category in skillCategories"
+            :key="category.title"
+            class="skills-block"
+          >
+            <h3>{{ category.title }}</h3>
             <div class="skill-cloud">
-              <span v-for="skill in skills" :key="skill.label" class="skill-pill">
+              <span v-for="skill in category.items" :key="skill.label" class="skill-pill">
                 <span
                   class="skill-mark"
                   :style="{
@@ -173,33 +200,18 @@
               </span>
             </div>
           </div>
-
-          <div class="skills-block">
-            <h3>Education</h3>
-            <div class="cert-grid">
-              <article v-for="item in education" :key="item.school" class="cert-card">
-                <span class="cert-badge">{{ item.badge }}</span>
-                <h4>{{ item.degree }}</h4>
-                <p>{{ item.school }}</p>
-                <p>{{ item.meta }}</p>
-              </article>
-            </div>
-          </div>
         </div>
       </section>
 
       <section id="projects" class="content-section section-light">
         <div class="section-inner">
           <div class="section-heading">
-            <span class="section-marker">◀</span>
             <div>
               <h2>Projects</h2>
-              <p>
-                Resume highlights spanning full-stack product engineering,
-                AI-assisted systems, and scalable application development.
-              </p>
             </div>
           </div>
+
+          <p class="section-kicker">"Building systems that fail gracefully and improve continuously"</p>
 
           <div
             v-for="group in projectGroups"
@@ -251,22 +263,26 @@
 
                   <div class="project-actions">
                     <a
-                      v-if="project.github"
-                      :href="project.github"
+                      v-for="action in project.actions"
+                      :key="`${project.title}-${action.type}`"
+                      :href="action.href"
                       target="_blank"
                       rel="noreferrer"
-                      class="ghost-action"
+                      class="project-action-icon"
+                      :aria-label="action.label"
+                      :title="action.label"
                     >
-                      GitHub
-                    </a>
-                    <a
-                      v-if="project.link"
-                      :href="project.link"
-                      target="_blank"
-                      rel="noreferrer"
-                      class="primary-action"
-                    >
-                      View
+                      <svg
+                        class="social-icon"
+                        :viewBox="projectActionIcons[action.type].viewBox"
+                        aria-hidden="true"
+                      >
+                        <path
+                          v-for="(path, index) in projectActionIcons[action.type].paths"
+                          :key="`${action.type}-${index}`"
+                          v-bind="path"
+                        />
+                      </svg>
                     </a>
                   </div>
                 </div>
@@ -339,7 +355,6 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import heroImage from './assets/hero.png';
 import awsIcon from './svg/AWS.svg';
 import antDesignIcon from './svg/Ant-Design.svg';
 import bashIcon from './svg/Bash.svg';
@@ -373,6 +388,7 @@ import typescriptIcon from './svg/TypeScript.svg';
 import vueIcon from './svg/Vue.js.svg';
 
 const scrollProgress = ref(0);
+const expandedJourneyIndex = ref(0);
 
 const heroRole =
   'Full-Stack Software Engineer building web applications and AI/ML systems';
@@ -394,6 +410,13 @@ const socialLinks = [
   { label: 'Gmail', icon: 'gmail', href: 'mailto:kishan.kc.cs@gmail.com' },
 ];
 
+const sectionLinks = [
+  { id: 'about', label: 'About', icon: '◉' },
+  { id: 'skills', label: 'Skills', icon: '⌘' },
+  { id: 'education', label: 'Education', icon: '▣' },
+  { id: 'projects', label: 'Projects', icon: '✦' },
+];
+
 const brandIcons = {
   website: {
     viewBox: '0 0 24 24',
@@ -409,6 +432,15 @@ const brandIcons = {
     paths: [
       {
         d: 'M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.36 6.84 9.71.5.1.68-.22.68-.48 0-.24-.01-1.04-.02-1.88-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .08 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.36 1.9-1.32 2.74-1.05 2.74-1.05.56 1.42.21 2.47.11 2.73.64.72 1.03 1.63 1.03 2.75 0 3.95-2.35 4.81-4.58 5.06.36.32.68.95.68 1.92 0 1.39-.01 2.52-.01 2.87 0 .27.18.59.69.48A10.23 10.23 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z',
+        fill: 'currentColor',
+      },
+    ],
+  },
+  vercel: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M12 4 21 19H3L12 4Z',
         fill: 'currentColor',
       },
     ],
@@ -445,6 +477,11 @@ const brandIcons = {
   },
 };
 
+const projectActionIcons = {
+  github: brandIcons.github,
+  vercel: brandIcons.vercel,
+};
+
 const experience = [
   {
     company: 'Beehive Technologies',
@@ -469,29 +506,7 @@ const experience = [
       'Enabled secure and reliable data operations by integrating REST APIs using Postman and connecting them to a structuredfrontend service layer, ensuring consistent CRUD functionality across HRM features.'
     ],
   },
-  {
-    company: 'George Washington University',
-    role: 'M.S. Computer Science',
-    date: 'Expected May 2026',
-    logo: '▦',
-    points: [
-      'Master of Science in Computer Science with a 3.7 GPA.',
-      'Built graduate-level systems including the AI-Assisted Learning and Summarization System and WeCureIt.',
-    ],
-  },
-  {
-    company: 'Tribhuvan University',
-    role: 'BSc Computer Science & Information Technology',
-    date: 'Dec 2022',
-    logo: '◇',
-    points: [
-      'Completed undergraduate studies in Computer Science & Information Technology with a 3.7 GPA.',
-      'Built a strong foundation in software engineering, data structures, systems, and full-stack development.',
-    ],
-  },
 ];
-
-const expandedExperience = ref(0);
 
 const skillMeta = {
   TypeScript: { icon: 'TS', iconBg: 'rgba(49, 120, 198, 0.18)', iconColor: '#6cb3ff', borderColor: 'rgba(108, 179, 255, 0.32)' },
@@ -501,6 +516,8 @@ const skillMeta = {
   'C++': { icon: 'C+', iconBg: 'rgba(0, 102, 204, 0.16)', iconColor: '#8bbcff', borderColor: 'rgba(139, 188, 255, 0.28)' },
   Bash: { icon: '>_', iconBg: 'rgba(84, 169, 89, 0.16)', iconColor: '#9ce5a0', borderColor: 'rgba(156, 229, 160, 0.28)' },
   PHP: { icon: 'PHP', iconBg: 'rgba(119, 123, 179, 0.18)', iconColor: '#bcc0ff', borderColor: 'rgba(188, 192, 255, 0.28)' },
+  HTML5: { icon: 'H5', iconBg: 'rgba(227, 79, 38, 0.16)', iconColor: '#ffaf94', borderColor: 'rgba(255, 175, 148, 0.28)' },
+  CSS3: { icon: 'C3', iconBg: 'rgba(38, 77, 228, 0.16)', iconColor: '#95a9ff', borderColor: 'rgba(149, 169, 255, 0.28)' },
   HTML: { icon: 'H5', iconBg: 'rgba(227, 79, 38, 0.16)', iconColor: '#ffaf94', borderColor: 'rgba(255, 175, 148, 0.28)' },
   CSS: { icon: 'C3', iconBg: 'rgba(38, 77, 228, 0.16)', iconColor: '#95a9ff', borderColor: 'rgba(149, 169, 255, 0.28)' },
   React: { icon: '⚛', iconBg: 'rgba(97, 218, 251, 0.16)', iconColor: '#92eeff', borderColor: 'rgba(146, 238, 255, 0.28)' },
@@ -521,11 +538,15 @@ const skillMeta = {
   Docker: { icon: '🐳', iconBg: 'rgba(13, 183, 237, 0.18)', iconColor: '#8fe8ff', borderColor: 'rgba(143, 232, 255, 0.28)' },
   AWS: { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
   'GitHub Actions': { icon: 'GA', iconBg: 'rgba(32, 136, 255, 0.18)', iconColor: '#9bc9ff', borderColor: 'rgba(155, 201, 255, 0.28)' },
+  'CI/CD': { icon: 'CI', iconBg: 'rgba(55, 130, 255, 0.18)', iconColor: '#a8cbff', borderColor: 'rgba(168, 203, 255, 0.28)' },
   Linux: { icon: '🐧', iconBg: 'rgba(245, 206, 66, 0.18)', iconColor: '#ffe48e', borderColor: 'rgba(255, 228, 142, 0.28)' },
   Postman: { icon: 'Pm', iconBg: 'rgba(255, 108, 55, 0.18)', iconColor: '#ffb89e', borderColor: 'rgba(255, 184, 158, 0.28)' },
   Jira: { icon: 'Jr', iconBg: 'rgba(38, 132, 255, 0.18)', iconColor: '#9ec8ff', borderColor: 'rgba(158, 200, 255, 0.28)' },
   Trello: { icon: 'Tr', iconBg: 'rgba(0, 121, 191, 0.18)', iconColor: '#98dcff', borderColor: 'rgba(152, 220, 255, 0.28)' },
   Git: { icon: 'Git', iconBg: 'rgba(240, 80, 51, 0.18)', iconColor: '#ffb29e', borderColor: 'rgba(255, 178, 158, 0.28)' },
+  Redis: { icon: 'Re', iconBg: 'rgba(220, 64, 50, 0.18)', iconColor: '#ffb4ac', borderColor: 'rgba(255, 180, 172, 0.28)' },
+  Jest: { icon: 'Je', iconBg: 'rgba(153, 78, 50, 0.18)', iconColor: '#efc1ae', borderColor: 'rgba(239, 193, 174, 0.28)' },
+  'Agile Methodologies': { icon: 'Ag', iconBg: 'rgba(99, 134, 189, 0.18)', iconColor: '#b6d2ff', borderColor: 'rgba(182, 210, 255, 0.28)' },
   'GPT API Integration': { icon: 'AI', iconBg: 'rgba(16, 163, 127, 0.18)', iconColor: '#9af1d4', borderColor: 'rgba(154, 241, 212, 0.28)' },
   OpenCV: { icon: 'CV', iconBg: 'rgba(92, 109, 228, 0.18)', iconColor: '#b4c1ff', borderColor: 'rgba(180, 193, 255, 0.28)' },
   'Machine Learning': { icon: 'ML', iconBg: 'rgba(138, 92, 246, 0.18)', iconColor: '#d1b4ff', borderColor: 'rgba(209, 180, 255, 0.28)' },
@@ -540,6 +561,8 @@ const skillIconFileMap = {
   Java: javaIcon,
   'C++': cppIcon,
   Bash: bashIcon,
+  HTML5: htmlIcon,
+  CSS3: cssIcon,
   HTML: htmlIcon,
   CSS: cssIcon,
   React: reactIcon,
@@ -588,59 +611,106 @@ const buildSkillBadge = (label) => {
   };
 };
 
-const skills = [
-  'TypeScript',
-  'JavaScript',
-  'Python',
-  'Java',
-  'C++',
-  'Bash',
-  'HTML',
-  'CSS',
-  'React',
-  'Next.js',
-  'Vue.js',
-  'Redux Toolkit',
-  'Tailwind CSS',
-  'Ant Design',
-  'Bootstrap',
-  'Node.js',
-  'Express.js',
-  'Flask',
-  'REST APIs',
-  'PostgreSQL',
-  'MySQL',
-  'Prisma ORM',
-  'Docker',
-  'AWS',
-  'GitHub Actions',
-  'Linux',
-  'Postman',
-  'Jira',
-  'Trello',
-  'Git',
-  'GPT API Integration',
-  'OpenCV',
-  'Computer Systems Simulation',
-  'Machine Learning',
-  'PyTorch',
-  'Google Colab',
-].map(buildSkillBadge);
+const skillCategories = [
+  {
+    title: 'Languages',
+    items: ['Python', 'TypeScript', 'JavaScript', 'Java', 'C++', 'Bash'].map(buildSkillBadge),
+  },
+  {
+    title: 'Frontend',
+    items: ['React', 'Next.js', 'Redux Toolkit', 'Tailwind CSS', 'HTML5', 'CSS3'].map(buildSkillBadge),
+  },
+  {
+    title: 'Backend',
+    items: ['Node.js', 'Express.js', 'Flask', 'REST APIs', 'Prisma ORM'].map(buildSkillBadge),
+  },
+  {
+    title: 'Cloud & DevOps',
+    items: ['AWS', 'Docker', 'GitHub Actions', 'CI/CD', 'Linux'].map(buildSkillBadge),
+  },
+  {
+    title: 'Databases',
+    items: ['PostgreSQL', 'MySQL', 'Redis'].map(buildSkillBadge),
+  },
+  {
+    title: 'Tools',
+    items: ['Git', 'Postman', 'Jira', 'Jest', 'Agile Methodologies'].map(buildSkillBadge),
+  },
+];
 
 const education = [
   {
+    type: 'education',
     badge: 'MS',
+    title: 'George Washington University',
+    subtitle: 'Master of Science, Computer Science',
     degree: 'Master of Science, Computer Science',
     school: 'George Washington University',
     meta: 'Washington, DC • May 2026',
+    courses: [
+      'Advanced Machine Learning',
+      'Computer Vision',
+      'Cloud Computing',
+      'Algorithms',
+      'Distributed Systems',
+      'Software Engineering',
+    ],
+    transcriptHref: '#education',
+    points: [
+      'Graduate studies focused on machine learning, systems, and software engineering.',
+      'Built project work spanning recommendation systems, computer vision, and production-oriented web applications.',
+    ],
+    anchorId: 'education',
   },
   {
+    type: 'education',
     badge: 'BS',
+    title: 'Tribhuvan University',
+    subtitle: 'BSc, Computer Science & Information Technology',
     degree: 'BSc, Computer Science & Information Technology',
     school: 'Tribhuvan University',
     meta: 'Kathmandu, Nepal • Dec 2022',
+    courses: [
+      'Data Structures and Algorithms',
+      'Database Management Systems',
+      'Operating Systems',
+      'Computer Networks',
+      'Software Engineering',
+      'Web Technology',
+    ],
+    transcriptHref: '#education',
+    points: [
+      'Built a strong foundation in algorithms, systems, databases, networking, and software engineering.',
+      'Developed the technical base that shaped later work in full-stack development and AI-assisted systems.',
+    ],
   },
 ];
+
+const journeyTimeline = [
+  ...experience.map((item) => ({
+    type: 'experience',
+    kindLabel: 'Experience',
+    title: item.company,
+    subtitle: item.role,
+    date: item.date,
+    year: item.date.match(/20\d{2}/)?.[0] || '',
+    meta: 'Professional impact across product engineering, performance, and scalable application delivery.',
+    points: item.points,
+  })),
+  ...education.map((item) => ({
+    type: 'education',
+    kindLabel: 'Education',
+    title: item.school,
+    subtitle: item.degree,
+    date: item.meta.split('•').at(-1)?.trim() || item.meta,
+    year: item.meta.match(/20\d{2}/)?.[0] || '',
+    meta: 'Academic foundations in computer science, machine learning, systems, and software engineering.',
+    points: item.points,
+    courses: item.courses,
+    transcriptHref: item.transcriptHref,
+    anchorId: item.anchorId,
+  })),
+].sort((a, b) => Number(b.year || 0) - Number(a.year || 0));
 
 const projectGroups = [
   {
@@ -652,9 +722,13 @@ const projectGroups = [
         description:
           'Built recommendation pipelines in Python for collaborative, content-based, and hybrid ranking, implementing LightGCN with PyTorch and evaluating performance on the MovieLens 100K dataset.',
         tags: ['Python', 'PyTorch', 'Machine Learning', 'Google Colab'],
-        github:
-          'https://github.com/kishankc123/Advanced_Machine_Learning/blob/main/MovieLens100k.ipynb',
-        link: '',
+        actions: [
+          {
+            type: 'github',
+            label: 'View MovieLens 100K Recommender System on GitHub',
+            href: 'https://github.com/kishankc123/Advanced_Machine_Learning/blob/main/MovieLens100k.ipynb',
+          },
+        ],
         accent:
           'linear-gradient(135deg, rgba(144, 165, 255, 0.22), rgba(0, 0, 0, 0.42))',
       },
@@ -663,8 +737,13 @@ const projectGroups = [
         description:
           'A secure role-based clinical scheduling platform built with Next.js, React, TypeScript, Node.js, Prisma ORM, and PostgreSQL, with concurrency-safe booking logic and 2FA-backed authentication.',
         tags: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Prisma ORM', 'PostgreSQL'],
-        github: 'https://github.com/kishankc123/WeCureIt/tree/main',
-        link: '',
+        actions: [
+          {
+            type: 'vercel',
+            label: 'Open WeCureIt on Vercel',
+            href: 'https://we-cure-it.vercel.app/',
+          },
+        ],
         accent:
           'linear-gradient(135deg, rgba(111, 160, 255, 0.22), rgba(0, 0, 0, 0.42))',
       },
@@ -673,8 +752,13 @@ const projectGroups = [
         description:
           'Improved robustness under blur and stylized distribution shifts with a research-driven test-time training system in PyTorch, achieving strong gains on distorted image inputs.',
         tags: ['Python', 'PyTorch', 'Machine Learning', 'Google Colab'],
-        github: '',
-        link: '',
+        actions: [
+          {
+            type: 'github',
+            label: 'View more projects on GitHub',
+            href: 'https://github.com/kishankc123/',
+          },
+        ],
         accent:
           'linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.45))',
       },
@@ -683,8 +767,13 @@ const projectGroups = [
         description:
           'Built an AI-powered learning platform that generated timestamped summaries and quizzes using GPT APIs with a Flask backend, Vue.js frontend, OpenCV processing, and Linux-based workflows.',
         tags: ['Python', 'Flask', 'Vue.js', 'GPT API Integration', 'OpenCV', 'Docker'],
-        github: '',
-        link: '',
+        actions: [
+          {
+            type: 'github',
+            label: 'View more projects on GitHub',
+            href: 'https://github.com/kishankc123/',
+          },
+        ],
         accent:
           'linear-gradient(135deg, rgba(166, 217, 255, 0.14), rgba(0, 0, 0, 0.45))',
       },
@@ -696,11 +785,11 @@ const scrollTo = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
-const toggleExperience = (index) => {
-  expandedExperience.value = expandedExperience.value === index ? null : index;
-};
-
 const getSkillBadge = (label) => buildSkillBadge(label);
+
+const toggleJourney = (index) => {
+  expandedJourneyIndex.value = expandedJourneyIndex.value === index ? null : index;
+};
 
 const updateScrollProgress = () => {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
