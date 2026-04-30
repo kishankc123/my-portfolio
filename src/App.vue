@@ -5,9 +5,7 @@
     <section id="hero" class="hero-section">
       <div class="hero-pattern"></div>
       <div class="hero-copy">
-        <p class="eyebrow">Application Developer</p>
-        <h1 class="hero-name">KISHAN</h1>
-        <h2 class="hero-subtitle">K C</h2>
+        <h1 class="hero-name">KISHAN K C</h1>
         <div class="hero-divider"></div>
         <p class="hero-role">{{ heroRole }}</p>
 
