@@ -18,6 +18,9 @@
   --accent: #688fbe;
   --accent-strong: #36567f;
   --shadow: 0 26px 80px rgba(43, 64, 95, 0.18);
+  --font-heading: clamp(2.8rem, 4vw, 3.4rem);
+  --font-subheading: clamp(1.4rem, 2vw, 1.7rem);
+  --font-body: 1rem;
 }
 
 * {
@@ -82,21 +85,21 @@ img {
 .hero-section {
   position: relative;
   display: grid;
-  grid-template-columns: 60fr 40fr;
+  grid-template-columns: 80fr 20fr;
   align-items: center;
   min-height: 100vh;
   padding: 0;
-  background: #f4f7fc;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.32), transparent 24%),
+    linear-gradient(135deg, #83a5d0 0%, #bdd0ea 100%);
   border-bottom: 1px solid rgba(80, 104, 143, 0.16);
 }
 
 .hero-pattern {
   position: absolute;
-  inset: 0 40% 0 0;
+  inset: 0;
   background:
-    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.32), transparent 24%),
-    radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1.5px),
-    linear-gradient(135deg, #83a5d0 0%, #bdd0ea 100%);
+    radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1.5px);
   background-size: 24px 24px;
   pointer-events: none;
 }
@@ -123,7 +126,7 @@ img {
   color: rgba(54, 86, 127, 0.72);
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  font-size: 0.84rem;
+  font-size: var(--font-body);
 }
 
 .hero-name,
@@ -141,7 +144,7 @@ img {
 
 .hero-name {
   margin: 0;
-  font-size: clamp(4.2rem, 9vw, 8.5rem);
+  font-size: var(--font-heading);
   line-height: 0.92;
   letter-spacing: 0.02em;
   color: #2d466a;
@@ -149,9 +152,9 @@ img {
 
 .hero-subtitle {
   margin: 0.25rem 0 1rem;
-  font-size: clamp(2rem, 5vw, 4.7rem);
+  font-size: var(--font-heading);
   font-weight: 300;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   color: rgba(54, 86, 127, 0.7);
 }
 
@@ -165,7 +168,7 @@ img {
 .hero-role {
   max-width: 34rem;
   margin: 0 0 1.35rem;
-  font-size: clamp(1rem, 2vw, 1.55rem);
+  font-size: var(--font-subheading);
   font-weight: 600;
   color: rgba(46, 63, 89, 0.76);
 }
@@ -204,7 +207,7 @@ img {
 }
 
 .social-wordmark {
-  font-size: 0.95rem;
+  font-size: var(--font-body);
   font-weight: 800;
   line-height: 1;
 }
@@ -243,7 +246,7 @@ img {
 }
 
 .scroll-arrow {
-  font-size: 1rem;
+  font-size: var(--font-body);
 }
 
 .hero-portrait-wrap {
@@ -251,7 +254,6 @@ img {
   justify-content: center;
   align-items: flex-end;
   min-height: 100vh;
-  background: #f4f7fc;
   overflow: hidden;
 }
 
@@ -265,9 +267,9 @@ img {
 
 .hero-portrait {
   position: relative;
-  width: min(100%, 720px);
-  height: min(100vh, 980px);
-  min-width: 320px;
+  width: min(100%, 320px);
+  height: min(88vh, 720px);
+  min-width: 180px;
   object-fit: contain;
   object-position: center bottom;
   filter: none;
@@ -307,12 +309,12 @@ main {
 .section-marker {
   margin-top: 0.55rem;
   color: var(--accent);
-  font-size: 1rem;
+  font-size: var(--font-body);
 }
 
 .section-heading h2 {
   margin: 0;
-  font-size: clamp(2.4rem, 4vw, 3.75rem);
+  font-size: var(--font-heading);
   line-height: 0.95;
   letter-spacing: -0.03em;
 }
@@ -321,7 +323,7 @@ main {
   margin: 0.7rem 0 0;
   max-width: 62rem;
   color: var(--text-soft);
-  font-size: 1.2rem;
+  font-size: var(--font-body);
   line-height: 1.55;
 }
 
@@ -333,9 +335,10 @@ main {
 
 .section-kicker {
   margin: 0 0 3rem;
-  font-size: clamp(2.7rem, 6vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-size: var(--font-subheading);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-style: italic;
   color: #313d52;
 }
 
@@ -350,14 +353,14 @@ main {
 .skills-block h3,
 .project-group-header h3 {
   margin: 0 0 0.5rem;
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-size: var(--font-heading);
 }
 
 .journey-intro p,
 .project-group-header p {
   margin: 0;
   color: var(--text-soft);
-  font-size: 1.12rem;
+  font-size: var(--font-body);
   line-height: 1.5;
 }
 
@@ -418,7 +421,7 @@ main {
   border-radius: 0.45rem;
   background: #eef4ff;
   color: #ff8f45;
-  font-size: 1rem;
+  font-size: var(--font-body);
   font-weight: 800;
 }
 
@@ -426,13 +429,14 @@ main {
 .project-card h4,
 .cert-card h4 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: var(--font-subheading);
   letter-spacing: -0.03em;
 }
 
 .timeline-company p {
   margin: 0.2rem 0 0;
   color: var(--text-soft);
+  font-size: var(--font-body);
 }
 
 .timeline-meta {
@@ -481,7 +485,7 @@ main {
   border: 1px solid rgba(150, 171, 201, 0.18);
   background: rgba(255, 255, 255, 0.02);
   color: rgba(245, 249, 255, 0.85);
-  font-size: 0.96rem;
+  font-size: var(--font-body);
   line-height: 1;
 }
 
@@ -495,10 +499,17 @@ main {
   padding: 0 0.3rem;
   border: 1px solid transparent;
   border-radius: 0.38rem;
-  font-size: 0.7rem;
+  font-size: var(--font-body);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.02em;
+}
+
+.skill-icon-image {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  display: block;
 }
 
 .cert-grid {
@@ -591,7 +602,7 @@ main {
 
 .project-card p {
   margin: 0.6rem 0 0;
-  font-size: 0.98rem;
+  font-size: var(--font-body);
   line-height: 1.45;
   color: rgba(234, 241, 252, 0.86);
 }
@@ -612,7 +623,7 @@ main {
   border-radius: 999px;
   background: rgba(206, 217, 236, 0.24);
   color: rgba(243, 247, 254, 0.9);
-  font-size: 0.68rem;
+  font-size: var(--font-body);
 }
 
 .project-actions {
@@ -628,7 +639,7 @@ main {
   border-radius: 0.35rem;
   font-weight: 700;
   text-align: center;
-  font-size: 0.92rem;
+  font-size: var(--font-body);
   transition:
     transform 180ms ease,
     opacity 180ms ease;
@@ -696,7 +707,7 @@ main {
 }
 
 .contact-form span {
-  font-size: 0.92rem;
+  font-size: var(--font-body);
 }
 
 .contact-form input,
@@ -735,7 +746,7 @@ main {
 
 .captcha-brand {
   margin-left: auto;
-  font-size: 0.85rem;
+  font-size: var(--font-body);
   font-weight: 700;
   color: #6f7c91;
   text-transform: uppercase;
@@ -757,7 +768,7 @@ main {
   padding: 1rem clamp(1.5rem, 4vw, 4rem);
   background: rgba(168, 194, 227, 0.55);
   color: #445777;
-  font-size: 0.92rem;
+  font-size: var(--font-body);
 }
 
 .site-footer p {
@@ -844,18 +855,6 @@ main {
   .timeline-meta {
     width: 100%;
     justify-content: space-between;
-  }
-
-  .hero-name {
-    font-size: clamp(3.2rem, 18vw, 5rem);
-  }
-
-  .hero-subtitle {
-    font-size: clamp(1.5rem, 9vw, 2.4rem);
-  }
-
-  .section-kicker {
-    font-size: clamp(2.2rem, 12vw, 3rem);
   }
 
   .contact-card {

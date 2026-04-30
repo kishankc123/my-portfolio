@@ -5,9 +5,8 @@
     <section id="hero" class="hero-section">
       <div class="hero-pattern"></div>
       <div class="hero-copy">
-        <p class="eyebrow">Application Developer</p>
-        <h1 class="hero-name">KISHAN</h1>
-        <h2 class="hero-subtitle">K C</h2>
+        <p class="eyebrow">ASPRINING SOFTWARE Developer</p>
+        <h1 class="hero-name">KISHAN K C</h1>
         <div class="hero-divider"></div>
         <p class="hero-role">{{ heroRole }}</p>
 
@@ -69,17 +68,15 @@
         </div>
 
         <button class="scroll-cue" @click="scrollTo('about')">
-          <span class="scroll-arrow">↓</span>
-          <span>Scroll Down</span>
+          <!-- <span class="scroll-arrow">↓</span>
+          <span>Scroll Down</span> -->
         </button>
       </div>
 
       <div class="hero-portrait-wrap">
         <div class="portrait-glow"></div>
         <img
-          class="hero-portrait"
-          :src="heroImage"
-          alt="Portrait of Kishan K C"
+          
         />
       </div>
     </section>
@@ -95,7 +92,7 @@
             </div>
           </div>
 
-          <p class="section-kicker">Building systems that fail gracefully and improve continuously</p>
+          <p class="section-kicker">"Building systems that fail gracefully and improve continuously"</p>
 
           <div class="about-grid">
             <div class="journey-intro">
@@ -164,7 +161,13 @@
                     borderColor: skill.borderColor,
                   }"
                 >
-                  {{ skill.icon }}
+                  <img
+                    v-if="skill.svg"
+                    :src="skill.svg"
+                    :alt="`${skill.label} icon`"
+                    class="skill-icon-image"
+                  />
+                  <span v-else>{{ skill.icon }}</span>
                 </span>
                 <span>{{ skill.label }}</span>
               </span>
@@ -234,7 +237,13 @@
                           borderColor: getSkillBadge(tag).borderColor,
                         }"
                       >
-                        {{ getSkillBadge(tag).icon }}
+                        <img
+                          v-if="getSkillBadge(tag).svg"
+                          :src="getSkillBadge(tag).svg"
+                          :alt="`${tag} icon`"
+                          class="skill-icon-image"
+                        />
+                        <span v-else>{{ getSkillBadge(tag).icon }}</span>
                       </span>
                       <span>{{ tag }}</span>
                     </span>
@@ -331,6 +340,37 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import heroImage from './assets/hero.png';
+import awsIcon from './svg/AWS.svg';
+import antDesignIcon from './svg/Ant-Design.svg';
+import bashIcon from './svg/Bash.svg';
+import bootstrapIcon from './svg/Bootstrap.svg';
+import cppIcon from './svg/C++-(CPlusPlus).svg';
+import cssIcon from './svg/CSS3.svg';
+import dockerIcon from './svg/Docker.svg';
+import expressIcon from './svg/Express.svg';
+import flaskIcon from './svg/Flask.svg';
+import gitIcon from './svg/Git.svg';
+import githubActionsIcon from './svg/GitHub-Actions.svg';
+import googleIcon from './svg/Google.svg';
+import htmlIcon from './svg/HTML5.svg';
+import javaIcon from './svg/Java.svg';
+import javascriptIcon from './svg/JavaScript.svg';
+import jiraIcon from './svg/Jira.svg';
+import linuxIcon from './svg/Linux.svg';
+import mysqlIcon from './svg/MySQL.svg';
+import nextIcon from './svg/Next.js.svg';
+import nodeIcon from './svg/Node.js.svg';
+import opencvIcon from './svg/OpenCV.svg';
+import postgresqlIcon from './svg/PostgresSQL.svg';
+import postmanIcon from './svg/Postman.svg';
+import pythonIcon from './svg/Python.svg';
+import pytorchIcon from './svg/PyTorch.svg';
+import reactIcon from './svg/React.svg';
+import reduxIcon from './svg/Redux.svg';
+import tailwindIcon from './svg/Tailwind-CSS.svg';
+import trelloIcon from './svg/Trello.svg';
+import typescriptIcon from './svg/TypeScript.svg';
+import vueIcon from './svg/Vue.js.svg';
 
 const scrollProgress = ref(0);
 
@@ -420,7 +460,7 @@ const experience = [
   {
     company: 'Devops Technology',
     role: 'Software Developer',
-    date: 'Jun 2022 - Dec 2022',
+    date: 'Jan 2022 - Dec 2022',
     logo: '△',
     points: [
       'Reduced feature development time by 20% by building reusable UI components using React, TypeScript, Redux Toolkit, and Tailwind CSS, enabling scalable integration across HRM modules such as payroll and attendance systems.',
@@ -493,11 +533,49 @@ const skillMeta = {
   'MS Visual Studio': { icon: 'VS', iconBg: 'rgba(104, 33, 122, 0.2)', iconColor: '#e0a7ff', borderColor: 'rgba(224, 167, 255, 0.28)' },
 };
 
+const skillIconFileMap = {
+  TypeScript: typescriptIcon,
+  JavaScript: javascriptIcon,
+  Python: pythonIcon,
+  Java: javaIcon,
+  'C++': cppIcon,
+  Bash: bashIcon,
+  HTML: htmlIcon,
+  CSS: cssIcon,
+  React: reactIcon,
+  'Next.js': nextIcon,
+  'Vue.js': vueIcon,
+  'Redux Toolkit': reduxIcon,
+  'Tailwind CSS': tailwindIcon,
+  'Ant Design': antDesignIcon,
+  Bootstrap: bootstrapIcon,
+  'Node.js': nodeIcon,
+  'Express.js': expressIcon,
+  Flask: flaskIcon,
+  PostgreSQL: postgresqlIcon,
+  MySQL: mysqlIcon,
+  Docker: dockerIcon,
+  AWS: awsIcon,
+  'GitHub Actions': githubActionsIcon,
+  Linux: linuxIcon,
+  Postman: postmanIcon,
+  Jira: jiraIcon,
+  Trello: trelloIcon,
+  Git: gitIcon,
+  OpenCV: opencvIcon,
+  PyTorch: pytorchIcon,
+  'Google Colab': googleIcon,
+};
+
+const resolveSkillSvg = (label) => {
+  return skillIconFileMap[label] || '';
+};
+
 const buildSkillBadge = (label) => {
   const meta = skillMeta[label];
 
   if (meta) {
-    return { label, ...meta };
+    return { label, ...meta, svg: resolveSkillSvg(label) };
   }
 
   return {
@@ -506,6 +584,7 @@ const buildSkillBadge = (label) => {
     iconBg: 'rgba(255, 255, 255, 0.1)',
     iconColor: '#f5f7fb',
     borderColor: 'rgba(255, 255, 255, 0.22)',
+    svg: resolveSkillSvg(label),
   };
 };
 
