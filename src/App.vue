@@ -500,7 +500,7 @@ const experience = [
   {
     company: 'Devops Technology',
     role: 'Software Developer',
-    date: 'Jun 2022 - Dec 2022',
+    date: 'Jan 2022 - Dec 2022',
     logo: '△',
     points: [
       'Reduced feature development time by 20% by building reusable UI components using React, TypeScript, Redux Toolkit, and Tailwind CSS, enabling scalable integration across HRM modules such as payroll and attendance systems.',
