@@ -91,7 +91,6 @@
       <section id="about" class="content-section section-light about-section">
         <div class="section-inner">
           <div class="section-heading">
-            <span class="section-marker">◀</span>
             <div>
               <h2>About Me</h2>
               <p>{{ summary }}</p>
@@ -167,7 +166,7 @@
         </div>
       </section>
 
-      <section id="skills" class="content-section section-dark">
+      <section id="skills" class="content-section section-alt">
         <div class="section-inner">
           <div class="section-heading">
             <div>
@@ -231,14 +230,28 @@
                 v-for="project in group.items"
                 :key="project.title"
                 class="project-card"
+                :class="{ expanded: expandedProjectTitle === project.title }"
                 :style="{ '--card-accent': project.accent }"
               >
                 <div class="project-overlay"></div>
                 <div class="project-content">
-                  <h4>{{ project.title }}</h4>
-                  <p>{{ project.description }}</p>
+                  <div class="project-title-row">
+                    <h4>{{ project.title }}</h4>
+                  </div>
 
-                  <div class="tag-list">
+                  <button
+                    class="project-description-row"
+                    type="button"
+                    @click="toggleProjectDescription(project.title)"
+                    :aria-expanded="expandedProjectTitle === project.title"
+                  >
+                    <span class="project-description-text">{{ project.description }}</span>
+                    <span class="project-description-hint">
+                      {{ expandedProjectTitle === project.title ? 'Show less' : 'Read more' }}
+                    </span>
+                  </button>
+
+                  <div class="tag-list project-tags-row">
                     <span
                       v-for="tag in project.tags"
                       :key="tag"
@@ -299,7 +312,6 @@
         <div class="contact-backdrop"></div>
         <div class="contact-card">
           <div class="section-heading contact-heading">
-            <span class="section-marker">◀</span>
             <div>
               <h2>Let's Talk</h2>
               <p>
@@ -392,6 +404,7 @@ import vueIcon from './svg/Vue.js.svg';
 
 const scrollProgress = ref(0);
 const expandedJourneyIndex = ref(0);
+const expandedProjectTitle = ref(null);
 
 const heroRole =
   'Full-Stack Software Engineer building web applications and AI/ML systems';
@@ -463,7 +476,7 @@ const brandIcons = {
       {
         d: 'M3 6.75 12 13l9-6.25',
         fill: 'none',
-        stroke: '#ea4335',
+        stroke: 'currentColor',
         'stroke-linecap': 'round',
         'stroke-linejoin': 'round',
         'stroke-width': '2',
@@ -774,7 +787,7 @@ const projectGroups = [
           {
             type: 'github',
             label: 'View more projects on GitHub',
-            href: 'https://github.com/kishankc123/',
+            href: 'https://github.com/kishankc123/AI-Assisted-Learning',
           },
         ],
         accent:
@@ -792,6 +805,10 @@ const getSkillBadge = (label) => buildSkillBadge(label);
 
 const toggleJourney = (index) => {
   expandedJourneyIndex.value = expandedJourneyIndex.value === index ? null : index;
+};
+
+const toggleProjectDescription = (title) => {
+  expandedProjectTitle.value = expandedProjectTitle.value === title ? null : title;
 };
 
 const updateScrollProgress = () => {
