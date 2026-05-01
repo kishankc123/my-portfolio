@@ -757,7 +757,7 @@ const projectGroups = [
           {
             type: 'vercel',
             label: 'Open WeCureIt on Vercel',
-            href: 'https://we-cure-it.vercel.app/',
+            href: 'https://we-cure-it2-v2-la2w6k8qb-kishans-projects-3ea8dea8.vercel.app/',
           },
         ],
         accent:
