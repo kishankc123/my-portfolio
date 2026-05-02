@@ -322,29 +322,72 @@
             </div>
           </div>
 
-          <form class="contact-form" @submit.prevent="handleSubmit">
-            <label>
-              <span>Name</span>
-              <input type="text" placeholder="Your Name" />
-            </label>
+            <form class="contact-form" @submit.prevent="handleSubmit">
+              <label>
+                <span>Name</span>
+              <input
+                v-model.trim="contactForm.name"
+                type="text"
+                name="name"
+                autocomplete="name"
+                placeholder="Your Name"
+                required
+              />
+              </label>
 
-            <label>
-              <span>Email</span>
-              <input type="email" placeholder="your@email.com" />
-            </label>
+              <label>
+                <span>Email</span>
+              <input
+                v-model.trim="contactForm.email"
+                type="email"
+                name="email"
+                autocomplete="email"
+                placeholder="your@email.com"
+                required
+              />
+              </label>
 
-            <label>
-              <span>Message</span>
-              <textarea rows="6" placeholder="Your Message..."></textarea>
-            </label>
+              <label>
+                <span>Message</span>
+              <textarea
+                v-model.trim="contactForm.message"
+                name="message"
+                rows="6"
+                placeholder="Your Message..."
+                required
+              ></textarea>
+              </label>
 
-            <div class="captcha-row">
-              <span class="captcha-box"></span>
-              <span>Verify you are human</span>
-              <span class="captcha-brand">Cloudflare</span>
+            <input
+              v-model="contactForm.company"
+              class="contact-honeypot"
+              type="text"
+              name="company"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+
+            <div class="contact-note">
+              Messages are sent securely to my inbox. This site can deliver to a Cloudflare-routed email address, but email sending is handled by the backend API.
             </div>
 
-            <button class="submit-button" type="submit">Submit</button>
+            <p
+              v-if="formStatus.message"
+              class="form-status"
+              :class="{
+                'form-status-success': formStatus.type === 'success',
+                'form-status-error': formStatus.type === 'error',
+              }"
+              role="status"
+              aria-live="polite"
+            >
+              {{ formStatus.message }}
+            </p>
+
+            <button class="submit-button" type="submit" :disabled="isSubmitting">
+              {{ isSubmitting ? 'Sending...' : 'Submit' }}
+            </button>
           </form>
         </div>
       </section>
@@ -369,7 +412,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import awsIcon from './svg/AWS.svg';
 import antDesignIcon from './svg/Ant-Design.svg';
 import bashIcon from './svg/Bash.svg';
@@ -405,6 +448,17 @@ import vueIcon from './svg/Vue.js.svg';
 const scrollProgress = ref(0);
 const expandedJourneyIndex = ref(0);
 const expandedProjectTitle = ref(null);
+const isSubmitting = ref(false);
+const formStatus = reactive({
+  type: '',
+  message: '',
+});
+const contactForm = reactive({
+  name: '',
+  email: '',
+  message: '',
+  company: '',
+});
 
 const heroRole =
   'Full-Stack Software Engineer building web applications and AI/ML systems';
@@ -671,7 +725,7 @@ const education = [
       'Distributed Systems',
       'Software Engineering',
     ],
-    transcriptHref: '#education',
+    transcriptHref: '/transcripts/gwtranscript.pdf',
     points: [
       'Graduate studies focused on machine learning, systems, and software engineering.',
       'Built project work spanning recommendation systems, computer vision, and production-oriented web applications.',
@@ -820,9 +874,47 @@ const updateScrollProgress = () => {
     scrollHeight > 0 ? Math.min((scrollTop / scrollHeight) * 100, 100) : 0;
 };
 
-const handleSubmit = () => {
-  window.alert('Thanks for reaching out. This portfolio form is currently a styled demo.');
+const resetContactForm = () => {
+  contactForm.name = '';
+  contactForm.email = '';
+  contactForm.message = '';
+  contactForm.company = '';
 };
+
+const handleSubmit = async (event) => {
+  const form = event.target;
+  
+  // Use the exact selectors from your template
+  const nameInput = form.querySelector('input[placeholder="Your Name"]');
+  const emailInput = form.querySelector('input[placeholder="your@email.com"]');
+  const messageInput = form.querySelector('textarea');
+
+  const payload = {
+    name: nameInput.value,
+    email: emailInput.value,
+    message: messageInput.value,
+  };
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert('Message sent successfully!');
+      form.reset();
+    } else {
+      alert(`Error: ${result.error}`);
+    }
+  } catch (err) {
+    alert('The server is not responding. Check your Vercel logs.');
+  }
+};
+
 
 onMounted(() => {
   updateScrollProgress();
