@@ -10,7 +10,12 @@
         <p class="hero-role">{{ heroRole }}</p>
 
         <div class="hero-actions">
-          <template v-for="link in socialLinks" :key="link.label">
+          <div
+            v-for="link in socialLinks"
+            :key="link.label"
+            class="social-link-shell"
+            :class="{ 'has-preview': link.preview }"
+          >
             <a
               v-if="link.href"
               :href="link.href"
@@ -20,21 +25,13 @@
               target="_blank"
               rel="noreferrer"
             >
-              <svg
-                v-if="link.icon !== 'indeed'"
-                class="social-icon"
-                :viewBox="brandIcons[link.icon].viewBox"
-                aria-hidden="true"
-              >
+              <svg class="social-icon" :viewBox="brandIcons[link.icon].viewBox" aria-hidden="true">
                 <path
                   v-for="(path, index) in brandIcons[link.icon].paths"
                   :key="`${link.icon}-${index}`"
                   v-bind="path"
                 />
               </svg>
-              <span v-else class="social-wordmark indeed-wordmark" aria-hidden="true">
-                in
-              </span>
             </a>
 
             <span
@@ -43,15 +40,7 @@
               :aria-label="`${link.label} unavailable`"
               :title="`${link.label} link coming soon`"
             >
-              <span v-if="link.icon === 'indeed'" class="social-wordmark indeed-wordmark">
-                in
-              </span>
-              <svg
-                v-else
-                class="social-icon"
-                :viewBox="brandIcons[link.icon].viewBox"
-                aria-hidden="true"
-              >
+              <svg class="social-icon" :viewBox="brandIcons[link.icon].viewBox" aria-hidden="true">
                 <path
                   v-for="(path, index) in brandIcons[link.icon].paths"
                   :key="`${link.icon}-${index}`"
@@ -59,7 +48,16 @@
                 />
               </svg>
             </span>
-          </template>
+
+            <div v-if="link.preview" class="social-preview" aria-hidden="true">
+              <div class="social-preview-eyebrow">{{ link.preview.eyebrow }}</div>
+              <div class="social-preview-handle">{{ link.preview.handle }}</div>
+              <p class="social-preview-copy">{{ link.preview.description }}</p>
+              <div class="social-preview-tags">
+                <span v-for="tag in link.preview.tags" :key="tag">{{ tag }}</span>
+              </div>
+            </div>
+          </div>
 
           <button class="pill-button" @click="scrollTo('contact')">
             Let's Talk
@@ -308,6 +306,163 @@
         </div>
       </section>
 
+      <section id="photography" class="content-section section-alt showcase-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <h2>Photography</h2>
+              <p>{{ photographyProfile.description }}</p>
+            </div>
+          </div>
+
+          <div class="showcase-grid">
+            <article class="showcase-card showcase-card-featured">
+              <div class="showcase-card-top">
+                <span class="showcase-kicker">{{ photographyProfile.kicker }}</span>
+                <h3>{{ photographyProfile.title }}</h3>
+              </div>
+              <p>{{ photographyProfile.summary }}</p>
+              <div class="featured-photo-card">
+                <img
+                  v-if="photographyProfile.featuredPhoto.src"
+                  :src="photographyProfile.featuredPhoto.src"
+                  :alt="photographyProfile.featuredPhoto.alt"
+                  class="featured-photo-image"
+                />
+                <div v-else class="featured-photo-placeholder" aria-hidden="true">
+                  <span>{{ photographyProfile.featuredPhoto.placeholderLabel }}</span>
+                </div>
+                <div class="featured-photo-copy">
+                  <h4>{{ photographyProfile.featuredPhoto.title }}</h4>
+                  <p>{{ photographyProfile.featuredPhoto.caption }}</p>
+                  <span class="photo-card-file">{{ photographyProfile.featuredPhoto.fileHint }}</span>
+                </div>
+              </div>
+              <a
+                class="showcase-link"
+                :href="photographyProfile.href"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View Instagram
+              </a>
+            </article>
+
+            <article class="showcase-card showcase-card-secondary photography-gallery-card">
+              <div class="showcase-card-top">
+                <span class="showcase-kicker">Photo Grid</span>
+                <h3>Selected Frames</h3>
+              </div>
+              <p>{{ photographyProfile.galleryIntro }}</p>
+              <div class="photo-grid">
+                <article
+                  v-for="photo in photographyProfile.photos"
+                  :key="photo.title"
+                  class="photo-card"
+                >
+                  <img
+                    v-if="photo.src"
+                    :src="photo.src"
+                    :alt="photo.alt"
+                    class="photo-card-image"
+                  />
+                  <div v-else class="photo-card-placeholder" aria-hidden="true">
+                    <span>{{ photo.placeholderLabel }}</span>
+                  </div>
+                  <div class="photo-card-copy">
+                    <h4>{{ photo.title }}</h4>
+                    <p>{{ photo.caption }}</p>
+                    <span class="photo-card-file">{{ photo.fileHint }}</span>
+                  </div>
+                </article>
+              </div>
+              <a
+                class="blog-read-more"
+                :href="photographyProfile.href"
+                target="_blank"
+                rel="noreferrer"
+              >
+                See more on Instagram
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="blog" class="content-section section-light showcase-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <h2>Blog</h2>
+              <p>{{ blogProfile.description }}</p>
+            </div>
+          </div>
+
+          <div class="showcase-grid">
+            <article class="showcase-card showcase-card-featured">
+              <div class="showcase-card-top">
+                <span class="showcase-kicker">{{ blogProfile.kicker }}</span>
+                <h3>{{ blogProfile.title }}</h3>
+              </div>
+              <p>{{ blogProfile.summary }}</p>
+              <div class="showcase-tag-row">
+                <span v-for="topic in blogProfile.tags" :key="topic" class="showcase-tag">
+                  {{ topic }}
+                </span>
+              </div>
+              <a
+                v-if="blogProfile.href"
+                class="showcase-link"
+                :href="blogProfile.href"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Read the Blog
+              </a>
+              <span v-else class="showcase-link showcase-link-disabled">Blog link coming soon</span>
+            </article>
+
+            <article class="showcase-card showcase-card-secondary">
+              <div class="showcase-card-top">
+                <span class="showcase-kicker">Featured Post</span>
+                <h3>{{ blogProfile.featuredPost.title }}</h3>
+              </div>
+              <p class="blog-preview-meta">
+                By {{ blogProfile.featuredPost.author }} · {{ blogProfile.featuredPost.date }}
+              </p>
+              <p>{{ blogProfile.featuredPost.excerpt }}</p>
+              <a
+                class="blog-read-more"
+                :href="blogProfile.featuredPost.href"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Read more
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="quotes" class="content-section section-alt quotes-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <h2>Quotes</h2>
+              <p>{{ quotesIntro }}</p>
+            </div>
+          </div>
+
+          <div class="quotes-grid">
+            <article v-for="quote in favoriteQuotes" :key="quote.text" class="quote-card">
+              <p class="quote-text">"{{ quote.text }}"</p>
+              <p class="quote-author">{{ quote.author }}</p>
+              <p v-if="quote.note" class="quote-note">{{ quote.note }}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section id="contact" class="contact-section">
         <div class="contact-backdrop"></div>
         <div class="contact-card">
@@ -473,6 +628,17 @@ const socialLinks = [
   { label: 'Website', icon: 'website', href: 'https://www.kckishan.com.np/' },
   { label: 'GitHub', icon: 'github', href: 'https://github.com/kishankc123/' },
   {
+    label: 'Instagram',
+    icon: 'instagram',
+    href: 'https://www.instagram.com/the.beast911/',
+    preview: {
+      eyebrow: 'Photography',
+      handle: '@the.beast911',
+      description: 'Street scenes, travel frames, portraits, and quiet details from everyday life.',
+      tags: ['Street', 'Travel', 'Portraits'],
+    },
+  },
+  {
     label: 'LinkedIn',
     icon: 'linkedin',
     href: 'https://www.linkedin.com/in/kishan-kc19/',
@@ -485,6 +651,9 @@ const sectionLinks = [
   { id: 'skills', label: 'Skills', icon: '⌘' },
   { id: 'education', label: 'Education', icon: '▣' },
   { id: 'projects', label: 'Projects', icon: '✦' },
+  { id: 'photography', label: 'Photography', icon: '◌' },
+  { id: 'blog', label: 'Blog', icon: '✎' },
+  { id: 'quotes', label: 'Quotes', icon: '❞' },
 ];
 
 const brandIcons = {
@@ -545,7 +714,118 @@ const brandIcons = {
       },
     ],
   },
+  instagram: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Z',
+        fill: 'none',
+        stroke: 'currentColor',
+        'stroke-linecap': 'round',
+        'stroke-linejoin': 'round',
+        'stroke-width': '2',
+      },
+      {
+        d: 'M12 8.25A3.75 3.75 0 1 1 8.25 12 3.75 3.75 0 0 1 12 8.25Z',
+        fill: 'none',
+        stroke: 'currentColor',
+        'stroke-linecap': 'round',
+        'stroke-linejoin': 'round',
+        'stroke-width': '2',
+      },
+      {
+        d: 'M17.35 6.65h.01',
+        fill: 'none',
+        stroke: 'currentColor',
+        'stroke-linecap': 'round',
+        'stroke-linejoin': 'round',
+        'stroke-width': '2.4',
+      },
+    ],
+  },
 };
+
+const photographyProfile = {
+  kicker: 'Visual Journal',
+  title: 'Photography & Visual Notes',
+  description:
+    'A place for photography work that complements the engineering side of the portfolio with observation, composition, and storytelling.',
+  // summary:
+    // 'Use this section to point visitors to your Instagram photography work. It is set up for portraits, travel frames, street photography, or any visual style you want to highlight.',
+  href: 'https://www.instagram.com/the.beast911/',
+  featuredPhoto: {
+    // title: 'Featured Frame',
+    // caption: 'Use one standout image here to represent the tone of your photography.',
+    alt: 'Featured photography placeholder',
+    src: '/photography/featured-photo.jpg',
+    placeholderLabel: 'Featured',
+    // fileHint: 'Suggested file: public/photography/featured-photo.jpg',
+  },
+  galleryIntro:
+    'A selection of photos that represent the range and style of my photography work. Visit Instagram for visitors who want to explore more.',
+  photos: [
+    {
+      // title: 'Photo One',
+      alt: 'Photography portfolio placeholder one',
+      src: '/photography/photo-1.jpg',
+    },
+    {
+      // title: 'Photo Two',
+      alt: 'Photography portfolio placeholder two',
+      src: '/photography/photo-2.jpg',
+    },
+    {
+      // title: 'Photo Three',
+      alt: 'Photography portfolio placeholder three',
+      src: '/photography/photo-3.jpg',
+    },
+    {
+      // title: 'Photo Four',
+      alt: 'Photography portfolio placeholder four',
+      src: '/photography/photo-4.jpg',
+    },
+  ],
+};
+
+const blogProfile = {
+  kicker: 'Writing',
+  title: 'Engineering Blog',
+  description:
+    'A dedicated home for longer-form writing about full-stack systems, AI projects, and lessons from building software end to end.',
+  summary:
+    'I use this space to write about machine learning evaluation, full-stack engineering, and the kinds of systems questions that matter in practice.',
+  href: 'https://blogs.gwu.edu/kishan-kc/',
+  tags: ['System Design', 'AI Notes', 'Project Breakdowns'],
+  featuredPost: {
+    title: 'Stress-Testing Traffic Sign Recognition Under Adverse Conditions',
+    author: 'kishan.kc',
+    date: 'December 14, 2025',
+    excerpt:
+      'This post explores how a YOLO-based traffic sign recognition model behaves across clean data, synthetic degradations, and real-world adverse weather imagery. The focus is not architectural novelty, but data-centric robustness testing, domain shift, and understanding whether synthetic perturbations truly reflect safety-critical real-world failure modes.',
+    href: 'https://blogs.gwu.edu/kishan-kc/',
+  },
+};
+
+const quotesIntro =
+  'A few lines that reflect how I think about craft, patience, growth, and the kind of work worth doing.';
+
+const favoriteQuotes = [
+  {
+    text: 'Itis nice to be important, but it is more important to be nice',
+    author: 'John Templeton',
+    note: 'A constant reminder to myself in any situation.',
+  },
+  {
+    text: 'You are only as old as the code you maintain!',
+    author: 'Professor R. Levy',
+    note: 'A reminder to stay consistent and maintainable in my coding style',
+  },
+  {
+    text: 'Stay hungry. Stay foolish.',
+    author: 'Steve Jobs',
+    note: 'A short line about staying curious and willing to keep learning.',
+  },
+];
 
 const projectActionIcons = {
   github: brandIcons.github,
