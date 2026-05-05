@@ -191,6 +191,8 @@ img {
   gap: 0.65rem;
   align-items: center;
   justify-content: center;
+  width: min(100%, 24rem);
+  margin-inline: auto;
 }
 
 .hero-section-nav {
@@ -199,6 +201,8 @@ img {
   gap: 0.8rem;
   margin-top: 1.5rem;
   justify-content: center;
+  width: min(100%, 32rem);
+  margin-inline: auto;
 }
 
 .section-jump {
@@ -994,14 +998,38 @@ main {
     padding-inline: 1rem;
   }
 
-  .hero-actions,
-  .hero-section-nav,
   .project-actions,
   .site-footer,
   .project-group-header,
   .section-heading {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .hero-copy {
+    padding-inline: 0;
+  }
+
+  .hero-actions {
+    width: min(100%, 20rem);
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .pill-button {
+    min-width: 8.75rem;
+  }
+
+  .hero-section-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 24rem);
+    gap: 0.7rem;
+  }
+
+  .section-jump {
+    width: 100%;
+    justify-content: center;
   }
 
   .project-grid,
@@ -1038,5 +1066,30 @@ main {
 
   .contact-card {
     padding: 1.25rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-copy {
+    padding-top: 4.5rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .icon-button,
+  .pill-button {
+    width: 100%;
+  }
+
+  .pill-button {
+    grid-column: 1 / -1;
+  }
+
+  .hero-section-nav {
+    width: 100%;
   }
 }
