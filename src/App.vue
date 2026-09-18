@@ -788,6 +788,36 @@ const projectGroups = [
     caption: 'Latest academic and application engineering work demonstrating full-stack development, AI-assisted systems, and scalable application design.',
     items: [
       {
+        title: 'CBMS — Multi-Tenant Client Accounting Platform',
+        description:
+          'A multi-tenant SaaS accounting platform built on a double-entry bookkeeping engine, where every transaction posts balanced journal entries and reports (Ledger, Trial Balance, P&L, Balance Sheet) are derived directly from them. Built with Next.js, NextAuth, Drizzle ORM, and PostgreSQL, with per-tenant data isolation and role-based permissions across Super Admin, Admin, and User roles.',
+        tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'NextAuth', 'Zod'],
+        actions: [
+          {
+            type: 'github',
+            label: 'View CBMS on GitHub',
+            href: 'https://github.com/kishankc123/cbms',
+          },
+        ],
+        accent:
+          'linear-gradient(135deg, rgba(130, 255, 200, 0.2), rgba(0, 0, 0, 0.42))',
+      },
+      {
+        title: 'Tipa — Inventory Management System',
+        description:
+          'A full-featured inventory management web app covering products, categories, groups, units, store places, team members, and reporting, backed by a layered data-flow architecture (page → api.ts → apiFetch → proxy route → backend) with JWT-based auth. Built with Next.js, React, TypeScript, shadcn/radix-ui, and Recharts for reporting dashboards.',
+        tags: ['Next.js', 'React', 'TypeScript', 'shadcn/ui', 'Recharts'],
+        actions: [
+          {
+            type: 'github',
+            label: 'View Tipa on GitHub',
+            href: 'https://github.com/kishankc123/Tipa',
+          },
+        ],
+        accent:
+          'linear-gradient(135deg, rgba(255, 205, 130, 0.2), rgba(0, 0, 0, 0.42))',
+      },
+      {
         title: 'MovieLens 100K Recommender System',
         description:
           'Built recommendation pipelines in Python for collaborative, content-based, and hybrid ranking, implementing LightGCN with PyTorch and evaluating performance on the MovieLens 100K dataset.',
