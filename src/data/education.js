@@ -1,0 +1,47 @@
+export const education = [
+  {
+    type: 'education',
+    badge: 'MS',
+    title: 'George Washington University',
+    subtitle: 'Master of Science, Computer Science',
+    degree: 'Master of Science, Computer Science',
+    school: 'George Washington University',
+    meta: 'Washington, DC • May 2026',
+    courses: [
+      'Advanced Machine Learning',
+      'Computer Vision',
+      'Cloud Computing',
+      'Algorithms',
+      'Distributed Systems',
+      'Software Engineering',
+    ],
+    transcriptHref: '/transcripts/gwtranscript.pdf',
+    points: [
+      'Graduate studies focused on machine learning, systems, and software engineering.',
+      'Built project work spanning recommendation systems, computer vision, and production-oriented web applications.',
+    ],
+    anchorId: 'education',
+  },
+  {
+    type: 'education',
+    badge: 'BS',
+    title: 'Tribhuvan University',
+    subtitle: 'BSc, Computer Science & Information Technology',
+    degree: 'BSc, Computer Science & Information Technology',
+    school: 'Tribhuvan University',
+    meta: 'Kathmandu, Nepal • Dec 2022',
+    courses: [
+      'Data Structures and Algorithms',
+      'Database Management Systems',
+      'Operating Systems',
+      'Computer Networks',
+      'Software Engineering',
+      'Web Technology',
+    ],
+    transcriptHref: '#education',
+    points: [
+      'Built a strong foundation in algorithms, systems, databases, networking, and software engineering.',
+      'Developed the technical base that shaped later work in full-stack development and AI-assisted systems.',
+    ],
+  },
+];
