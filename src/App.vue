@@ -1068,6 +1068,21 @@ const projectGroups = [
     caption: 'Latest academic and application engineering work demonstrating full-stack development, AI-assisted systems, and scalable application design.',
     items: [
       {
+        title: 'FinContext Agent — SEC Filing Portfolio Analysis',
+        description:
+          'Team project for the AMD Developer Hackathon 2026 (AI Agents track). Ingests 10-K and 10-Q filings from EDGAR, detects changes in disclosure language over time, scores holding-level risk, and generates analyst-style memos that cite exact filing chunks. Built with a LangGraph agent workflow on FastAPI, an inference gateway routing to NVIDIA NIM-hosted Qwen models, Qdrant vector retrieval with BGE embeddings and reranking, SQLite metadata, and a React (Vite) UI.',
+        tags: ['Python', 'FastAPI', 'LangGraph', 'React', 'Qdrant', 'Docker'],
+        actions: [
+          {
+            type: 'github',
+            label: 'View FinContext Agent on GitHub',
+            href: 'https://github.com/kishankc123/Finance-Context-Agent',
+          },
+        ],
+        accent:
+          'linear-gradient(135deg, rgba(200, 150, 255, 0.2), rgba(0, 0, 0, 0.42))',
+      },
+      {
         title: 'CBMS — Multi-Tenant Client Accounting Platform',
         description:
           'A multi-tenant SaaS accounting platform built on a double-entry bookkeeping engine, where every transaction posts balanced journal entries and reports (Ledger, Trial Balance, P&L, Balance Sheet) are derived directly from them. Built with Next.js, NextAuth, Drizzle ORM, and PostgreSQL, with per-tenant data isolation and role-based permissions across Super Admin, Admin, and User roles.',
