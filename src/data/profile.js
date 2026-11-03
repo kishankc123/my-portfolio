@@ -1,11 +1,11 @@
 export const heroRole =
-  'Full-Stack Software Engineer building web applications and AI/ML systems';
+  'React Frontend Engineer building accessible web applications and AI agent systems';
 
 export const summary =
-  'Full-stack software engineer with hands-on experience across modern web development and applied machine learning. Skilled in building scalable front-end and back-end systems with React, Next.js, Node.js, Flask, SQL, and TypeScript, while also shipping research-driven Python projects involving recommendation systems, computer vision, and GPT-powered applications.';
+  'React frontend engineer with hands-on experience shipping production React 19/TypeScript applications, real-time conversational UIs, and accessible, well-tested user experiences. Skilled across the stack with Next.js, Node.js, PostgreSQL, and FastAPI, and shipping research-driven AI projects involving hybrid retrieval (RAG), LangGraph agents, and GPT-powered applications.';
 
 export const journeyIntro =
-  'Experience across full-stack product engineering, secure application architecture, recommendation systems, computer vision workflows, and AI-assisted user experiences.';
+  'Experience across React frontend engineering, accessible UI architecture, multi-tenant full-stack product delivery, and AI agent/retrieval systems.';
 
 export const socialLinks = [
   { label: 'Website', icon: 'website', href: 'https://www.kckishan.com.np/' },

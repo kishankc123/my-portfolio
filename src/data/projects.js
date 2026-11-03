@@ -6,8 +6,8 @@ export const projectGroups = [
       {
         title: 'FinContext Agent — SEC Filing Portfolio Analysis',
         description:
-          'Team project for the AMD Developer Hackathon 2026 (AI Agents track). Ingests 10-K and 10-Q filings from EDGAR, detects changes in disclosure language over time, scores holding-level risk, and generates analyst-style memos that cite exact filing chunks. Built with a LangGraph agent workflow on FastAPI, an inference gateway routing to NVIDIA NIM-hosted Qwen models, Qdrant vector retrieval with BGE embeddings and reranking, SQLite metadata, and a React (Vite) UI.',
-        tags: ['Python', 'FastAPI', 'LangGraph', 'React', 'Qdrant', 'Docker'],
+          'Designed a hybrid retrieval pipeline combining BM25 keyword search, Qdrant vector search with BAAI bge-large-en-v1.5 embeddings, and BAAI bge-reranker-large reranking with reciprocal rank fusion, improving retrieval precision by 16 points (78% to 94%) over vector-only search, with retrieval clients built as swappable, dependency-injected components. Engineered a decoupled FastAPI/Uvicorn inference gateway proxying chat completion, embedding, and reranking requests to NVIDIA NIM. The Agent API owns the end-to-end workflow — hybrid retrieval, LangGraph-based disclosure change detection, and memo generation — processing 500+ SEC filings monthly with sub-2-second query response times.',
+        tags: ['Python', 'FastAPI', 'LangGraph', 'Qdrant', 'NVIDIA NIM', 'Docker'],
         actions: [
           {
             type: 'github',
@@ -36,8 +36,8 @@ export const projectGroups = [
       {
         title: 'Tipa — Inventory Management System',
         description:
-          'A full-featured inventory management web app covering products, categories, groups, units, store places, team members, and reporting, backed by a layered data-flow architecture (page → api.ts → apiFetch → proxy route → backend) with JWT-based auth. Built with Next.js, React, TypeScript, shadcn/radix-ui, and Recharts for reporting dashboards.',
-        tags: ['Next.js', 'React', 'TypeScript', 'shadcn/ui', 'Recharts'],
+          'A ~20-route inventory management dashboard built with React 19, Next.js 16 (App Router), and TypeScript, covering products, bulk import, reports, logs, and team management, with loading skeletons, error, and empty states on every view. Integrates with a Django REST backend through a layered API architecture (typed api.ts functions over a central apiFetch client) handling JWT auth, automatic Bearer headers, typed error handling, 401 redirects, and pagination. Dashboard and report views use Recharts for a daily-stock area chart, stat cards, and a weekly activity strip, with a responsive UI in Tailwind CSS v4, shadcn/ui, and Radix UI, tested with Vitest and React Testing Library.',
+        tags: ['Next.js', 'React', 'TypeScript', 'Django REST', 'shadcn/ui', 'Recharts'],
         actions: [
           {
             type: 'github',
@@ -64,9 +64,9 @@ export const projectGroups = [
           'linear-gradient(135deg, rgba(144, 165, 255, 0.22), rgba(0, 0, 0, 0.42))',
       },
       {
-        title: 'WeCureIt',
+        title: 'WeCureIt — Clinical Scheduling System',
         description:
-          'A secure role-based clinical scheduling platform built with Next.js, React, TypeScript, Node.js, Prisma ORM, and PostgreSQL, with concurrency-safe booking logic and 2FA-backed authentication.',
+          'A full-stack clinical scheduling platform built with Next.js, TypeScript, Node.js, Prisma, and PostgreSQL, enabling secure appointment management for patients, providers, and administrators through role-based workflows. Engineered a three-layer scheduling validation architecture combining business logic, PostgreSQL composite constraints, and Prisma transactions to guarantee atomic appointment booking while preventing conflicts across 500+ concurrent scheduling scenarios, secured with NextAuth, RBAC, middleware protection, and AES-256 encryption.',
         tags: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Prisma ORM', 'PostgreSQL'],
         actions: [
           {
@@ -77,6 +77,15 @@ export const projectGroups = [
         ],
         accent:
           'linear-gradient(135deg, rgba(111, 160, 255, 0.22), rgba(0, 0, 0, 0.42))',
+      },
+      {
+        title: 'AWS Academy Coursework — Three-Tier Web Application',
+        description:
+          'Architected and deployed a three-tier web application on AWS combining an RDS MySQL database, an Auto Scaling group of EC2 application servers across multiple Availability Zones, and an internet-facing Application Load Balancer, validated end-to-end through a live public-facing query application. Built serverless, event-driven data pipelines using AWS Lambda, DynamoDB, DynamoDB Streams, SNS, and EventBridge Scheduler, and automated infrastructure deployment with AWS CloudFormation and a CI/CD pipeline built with CodePipeline and CodeCommit, defining VPC networking and application stacks as YAML templates.',
+        tags: ['AWS', 'EC2', 'RDS', 'Lambda', 'DynamoDB', 'CloudFormation'],
+        actions: [],
+        accent:
+          'linear-gradient(135deg, rgba(255, 170, 90, 0.22), rgba(0, 0, 0, 0.42))',
       },
       {
         title: 'Dynamic Test-Time Training for Image Classification',

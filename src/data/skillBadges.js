@@ -6,14 +6,20 @@ import cppIcon from '../svg/C++-(CPlusPlus).svg';
 import cssIcon from '../svg/CSS3.svg';
 import dockerIcon from '../svg/Docker.svg';
 import expressIcon from '../svg/Express.svg';
+import fastapiIcon from '../svg/FastAPI.svg';
 import flaskIcon from '../svg/Flask.svg';
 import gitIcon from '../svg/Git.svg';
 import githubActionsIcon from '../svg/GitHub-Actions.svg';
+import githubIcon from '../svg/GitHub.svg';
+import gitlabIcon from '../svg/GitLab.svg';
 import googleIcon from '../svg/Google.svg';
+import graphqlIcon from '../svg/GraphQL.svg';
 import htmlIcon from '../svg/HTML5.svg';
 import javaIcon from '../svg/Java.svg';
 import javascriptIcon from '../svg/JavaScript.svg';
 import jiraIcon from '../svg/Jira.svg';
+import kotlinIcon from '../svg/Kotlin.svg';
+import kubernetesIcon from '../svg/Kubernetes.svg';
 import linuxIcon from '../svg/Linux.svg';
 import mysqlIcon from '../svg/MySQL.svg';
 import nextIcon from '../svg/Next.js.svg';
@@ -25,10 +31,16 @@ import pythonIcon from '../svg/Python.svg';
 import pytorchIcon from '../svg/PyTorch.svg';
 import reactIcon from '../svg/React.svg';
 import reduxIcon from '../svg/Redux.svg';
+import springIcon from '../svg/Spring.svg';
+import sqliteIcon from '../svg/SQLite.svg';
+import swaggerIcon from '../svg/Swagger.svg';
+import swiftIcon from '../svg/Swift.svg';
 import tailwindIcon from '../svg/Tailwind-CSS.svg';
 import trelloIcon from '../svg/Trello.svg';
 import typescriptIcon from '../svg/TypeScript.svg';
+import vercelIcon from '../svg/Vercel.svg';
 import vueIcon from '../svg/Vue.js.svg';
+import androidIcon from '../svg/Android.svg';
 
 const skillMeta = {
   TypeScript: { icon: 'TS', iconBg: 'rgba(49, 120, 198, 0.18)', iconColor: '#6cb3ff', borderColor: 'rgba(108, 179, 255, 0.32)' },
@@ -74,6 +86,45 @@ const skillMeta = {
   'Machine Learning': { icon: 'ML', iconBg: 'rgba(138, 92, 246, 0.18)', iconColor: '#d1b4ff', borderColor: 'rgba(209, 180, 255, 0.28)' },
   Xcode: { icon: 'X', iconBg: 'rgba(20, 164, 255, 0.18)', iconColor: '#92dcff', borderColor: 'rgba(146, 220, 255, 0.28)' },
   'MS Visual Studio': { icon: 'VS', iconBg: 'rgba(104, 33, 122, 0.2)', iconColor: '#e0a7ff', borderColor: 'rgba(224, 167, 255, 0.28)' },
+  Kotlin: { icon: 'Kt', iconBg: 'rgba(127, 82, 255, 0.18)', iconColor: '#c7b2ff', borderColor: 'rgba(199, 178, 255, 0.28)' },
+  SQL: { icon: 'SQL', iconBg: 'rgba(97, 110, 124, 0.18)', iconColor: '#d8e1ef', borderColor: 'rgba(216, 225, 239, 0.28)' },
+  'React Query': { icon: 'RQ', iconBg: 'rgba(255, 64, 129, 0.16)', iconColor: '#ff9ebf', borderColor: 'rgba(255, 158, 191, 0.28)' },
+  GraphQL: { icon: 'GQ', iconBg: 'rgba(225, 0, 152, 0.16)', iconColor: '#ff8fd0', borderColor: 'rgba(255, 143, 208, 0.28)' },
+  FastAPI: { icon: 'Fa', iconBg: 'rgba(5, 150, 105, 0.18)', iconColor: '#8ff0c9', borderColor: 'rgba(143, 240, 201, 0.28)' },
+  LangGraph: { icon: 'LG', iconBg: 'rgba(138, 92, 246, 0.18)', iconColor: '#d1b4ff', borderColor: 'rgba(209, 180, 255, 0.28)' },
+  RAG: { icon: 'RAG', iconBg: 'rgba(138, 92, 246, 0.18)', iconColor: '#d1b4ff', borderColor: 'rgba(209, 180, 255, 0.28)' },
+  'NVIDIA NIM': { icon: 'NV', iconBg: 'rgba(118, 185, 0, 0.18)', iconColor: '#baf27a', borderColor: 'rgba(186, 242, 122, 0.28)' },
+  'Prompt Engineering': { icon: 'PE', iconBg: 'rgba(138, 92, 246, 0.14)', iconColor: '#d1b4ff', borderColor: 'rgba(209, 180, 255, 0.24)' },
+  'GPT API Integration': { icon: 'AI', iconBg: 'rgba(16, 163, 127, 0.18)', iconColor: '#9af1d4', borderColor: 'rgba(154, 241, 212, 0.28)' },
+  Gemini: { icon: 'Ge', iconBg: 'rgba(66, 133, 244, 0.16)', iconColor: '#a7c7ff', borderColor: 'rgba(167, 199, 255, 0.28)' },
+  'GitHub Copilot': { icon: 'Co', iconBg: 'rgba(240, 80, 51, 0.16)', iconColor: '#ffb29e', borderColor: 'rgba(255, 178, 158, 0.28)' },
+  Cursor: { icon: 'Cu', iconBg: 'rgba(255, 255, 255, 0.1)', iconColor: '#f5f7fb', borderColor: 'rgba(255, 255, 255, 0.22)' },
+  Kubernetes: { icon: 'K8s', iconBg: 'rgba(50, 108, 229, 0.18)', iconColor: '#9fb8ff', borderColor: 'rgba(159, 184, 255, 0.28)' },
+  GitLab: { icon: 'GL', iconBg: 'rgba(226, 67, 41, 0.16)', iconColor: '#ffab93', borderColor: 'rgba(255, 171, 147, 0.28)' },
+  Vercel: { icon: '▲', iconBg: 'rgba(255, 255, 255, 0.1)', iconColor: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.24)' },
+  'Amazon EC2': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'Amazon S3': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'Amazon RDS': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'AWS Lambda': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'Amazon DynamoDB': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'AWS CloudFormation': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'Amazon VPC': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'AWS IAM': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'AWS CodePipeline': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  'AWS CodeCommit': { icon: 'aws', iconBg: 'rgba(255, 153, 0, 0.18)', iconColor: '#ffd18d', borderColor: 'rgba(255, 209, 141, 0.28)' },
+  SQLite: { icon: 'Li', iconBg: 'rgba(51, 103, 145, 0.18)', iconColor: '#9cc5ef', borderColor: 'rgba(156, 197, 239, 0.28)' },
+  Qdrant: { icon: 'Qd', iconBg: 'rgba(220, 38, 38, 0.16)', iconColor: '#ffaeae', borderColor: 'rgba(255, 174, 174, 0.28)' },
+  'Spring Boot': { icon: 'Sp', iconBg: 'rgba(109, 179, 63, 0.18)', iconColor: '#b6e68c', borderColor: 'rgba(182, 230, 140, 0.28)' },
+  Uvicorn: { icon: 'Uv', iconBg: 'rgba(79, 70, 229, 0.18)', iconColor: '#b7b0ff', borderColor: 'rgba(183, 176, 255, 0.28)' },
+  'OAuth 2.0': { icon: 'OA', iconBg: 'rgba(97, 110, 124, 0.18)', iconColor: '#d8e1ef', borderColor: 'rgba(216, 225, 239, 0.28)' },
+  JWT: { icon: 'JWT', iconBg: 'rgba(219, 39, 119, 0.16)', iconColor: '#ff9ecb', borderColor: 'rgba(255, 158, 203, 0.28)' },
+  'Swagger UI': { icon: 'OA', iconBg: 'rgba(133, 234, 45, 0.16)', iconColor: '#c4f58a', borderColor: 'rgba(196, 245, 138, 0.28)' },
+  'Kotlin Multiplatform': { icon: 'KMP', iconBg: 'rgba(127, 82, 255, 0.18)', iconColor: '#c7b2ff', borderColor: 'rgba(199, 178, 255, 0.28)' },
+  Android: { icon: 'An', iconBg: 'rgba(164, 198, 57, 0.18)', iconColor: '#d4ea9c', borderColor: 'rgba(212, 234, 156, 0.28)' },
+  iOS: { icon: 'iOS', iconBg: 'rgba(255, 255, 255, 0.1)', iconColor: '#f5f7fb', borderColor: 'rgba(255, 255, 255, 0.22)' },
+  SwiftUI: { icon: 'SU', iconBg: 'rgba(240, 81, 56, 0.16)', iconColor: '#ffab9a', borderColor: 'rgba(255, 171, 154, 0.28)' },
+  UIKit: { icon: 'UI', iconBg: 'rgba(240, 81, 56, 0.16)', iconColor: '#ffab9a', borderColor: 'rgba(255, 171, 154, 0.28)' },
+  Lighthouse: { icon: 'Lh', iconBg: 'rgba(245, 158, 11, 0.18)', iconColor: '#ffd48f', borderColor: 'rgba(255, 212, 143, 0.28)' },
 };
 
 const skillIconFileMap = {
@@ -110,6 +161,20 @@ const skillIconFileMap = {
   OpenCV: opencvIcon,
   PyTorch: pytorchIcon,
   'Google Colab': googleIcon,
+  Kotlin: kotlinIcon,
+  'Kotlin Multiplatform': kotlinIcon,
+  GraphQL: graphqlIcon,
+  FastAPI: fastapiIcon,
+  'GitHub Copilot': githubIcon,
+  Kubernetes: kubernetesIcon,
+  GitLab: gitlabIcon,
+  Vercel: vercelIcon,
+  SQLite: sqliteIcon,
+  'Spring Boot': springIcon,
+  'Swagger UI': swaggerIcon,
+  SwiftUI: swiftIcon,
+  UIKit: swiftIcon,
+  Android: androidIcon,
 };
 
 const resolveSkillSvg = (label) => skillIconFileMap[label] || '';
